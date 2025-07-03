@@ -1,0 +1,2 @@
+[console_scripts]
+openstack-mcp-test = openstackmcp.main:main

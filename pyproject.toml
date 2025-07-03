@@ -1,0 +1,14 @@
+[project]
+name = "openstackmcp"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+openstack-mcp-test = "openstackmcp.main:main"
+
+
+[tool.setuptools]
+packages = ["openstackmcp"]

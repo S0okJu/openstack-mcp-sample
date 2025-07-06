@@ -1,14 +1,9 @@
-from typing import List, Dict, Any
-import json
+from typing import List, Dict, Any 
+import openstack 
 
-import openstack
-from openstackmcp.server import mcp
-
-def list_servers() -> List[Dict[str, Any]]:
+def list_servers(conn:openstack.connect.Connection) -> List[Dict[str, Any]]:
     """Get nova server lists and return results"""
     try:
-        # OpenStack 연결 설정
-        conn = openstack.connect()
         
         # 서버 목록 가져오기
         servers = conn.compute.servers()
@@ -21,7 +16,7 @@ def list_servers() -> List[Dict[str, Any]]:
                 'status': server.status,
                 'created_at': server.created_at,
                 'updated_at': server.updated_at,
-            }
+            } 
             
             # 선택적 필드들 - 존재하는 경우에만 추가
             if hasattr(server, 'image') and server.image:
@@ -48,18 +43,3 @@ def list_servers() -> List[Dict[str, Any]]:
         
     except Exception as e:
         raise Exception(f"Failed to list servers: {str(e)}")
-
-@mcp.tool()
-def nova_list() -> str:
-    """
-    OpenStack Nova 서버 목록을 조회합니다.
-    
-    Returns:
-        str: 서버 목록의 JSON 문자열
-    """
-    try:
-        result = list_servers()
-        return json.dumps(result, indent=2, default=str)
-    except Exception as e:
-        error_msg = f"Error listing servers: {str(e)}"
-        return error_msg

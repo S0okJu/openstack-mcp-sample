@@ -1,3 +1,5 @@
+import re 
+
 def extract_error_patterns(log_content: str) -> Dict[str, Any]:
     """기본적인 에러 패턴 추출 (LLM 분석용 데이터 준비)"""
     if not log_content:

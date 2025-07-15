@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+
+clouds.yaml
+
+*.egg-info

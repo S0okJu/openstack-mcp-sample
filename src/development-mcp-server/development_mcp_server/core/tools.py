@@ -1,10 +1,8 @@
-from typing import Optional
 from fastmcp import Context
 
-from development_mcp_server.core.data import read_markdown, DevelopmentRule
-
-
-async def analyze_code_secure(code: str, ctx: Context) -> str:
+# ERROR: 'Context' object has no attribute 'fastmcp'
+# Failed! : 
+async def analyze_code_secure(code:str, ctx:Context) -> str:
     """
     Analyze code from predefined security rules.
     
@@ -16,8 +14,9 @@ async def analyze_code_secure(code: str, ctx: Context) -> str:
         str: Analysis result or error message
     """
     try:
-        rule = read_markdown(DevelopmentRule.SECURITY)
-        
+        ctx.info(ctx.client_id)
+        rule = await ctx.read_resource("resource://security-rules")
+                
         # https://gofastmcp.com/servers/logging
         # await ctx.info(f"Analyze rule:{len(rule)}")
         
